@@ -4,6 +4,15 @@ import { useState, useEffect } from "react";
 import axios from 'axios';
 import styles from './App.module.css';
 import { ReactComponent as Check } from './check.svg';
+import "@aws-amplify/ui-react/styles.css";
+import {
+  withAuthenticator,
+  Button,
+  Heading,
+  Image,
+  View,
+  Card,
+} from "@aws-amplify/ui-react";
 
 // const initialStories = [
 //     {
@@ -86,7 +95,7 @@ const useSemiPersistentState = (key, initialState) => {
 
 const API_ENDPOINT = 'https://hn.algolia.com/api/v1/search?query=';
 
-const App = () => {
+const App = ({ signOut }) => {
 
     const [searchTerm, setSearchTerm] = useSemiPersistentState('search', 'React');
 
@@ -142,6 +151,7 @@ const App = () => {
     return (
         <div className={styles.container}>
             <h1 className={styles.headlinePrimary}>My Hacker Stories</h1>
+            <Button onClick={signOut}>Sign Out</Button>
 
             <SearchForm
                 searchTerm={searchTerm}
@@ -153,6 +163,7 @@ const App = () => {
             {stories.isLoading ? (<p>Loading...</p>) :
                 <List list={stories.data} onRemoveItem={handleRemoveStory} />
             }
+
         </div>
     )
 }
@@ -229,4 +240,5 @@ const Item = ({ item, onRemoveItem }) =>
     </div>
 );
 
-export default App;
+//export default App;
+export default withAuthenticator(App);
