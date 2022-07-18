@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import axios from 'axios';
 import styles from './App.module.css';
 import { ReactComponent as Check } from './check.svg';
-import "@aws-amplify/ui-react/styles.css";
+import "@aws-amplify/ui-react/styles.css"; //for aws amplify
 import {
   withAuthenticator,
   Button,
